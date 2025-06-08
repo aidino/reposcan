@@ -43,49 +43,53 @@ Một tác tử điều phối trung tâm (Orchestrator Agent) sẽ chịu trác
 
 Sơ đồ dưới đây minh họa kiến trúc tổng thể của hệ thống và luồng tương tác chính giữa các thành phần:
 
-Code snippet
+```mermaid
+graph TD
+    User -->|Yêu cầu| OA(Orchestrator Agent - ADK)
 
-graph TD  
-    User \--\>|Yêu cầu| OA(Orchestrator Agent \- ADK)
+    subgraph "Hệ thống Multi-Agent"
+        OA -->|A2A Task| CRA(Code Retrieval Agent - ADK)
+        OA -->|A2A Task| SA(Static Analysis Agent - ADK)
+        OA -->|A2A Task| SCAA(SCA Agent - ADK)
+        OA -->|A2A Task| PRIA(PR Review & Impact Analysis Agent - ADK)
+        OA -->|A2A Task| DGA(Diagram Generation Agent - ADK)
+        OA -->|A2A Task| CSA(Code Suggestion Agent - ADK)
+        OA -->|A2A Task| QAA(Q&A Agent - ADK)
 
-    subgraph "Hệ thống Multi-Agent"  
-        OA \--\>|A2A Task| CRA(Code Retrieval Agent \- ADK)  
-        OA \--\>|A2A Task| SA(Static Analysis Agent \- ADK)  
-        OA \--\>|A2A Task| SCAA(SCA Agent \- ADK)  
-        OA \--\>|A2A Task| PRIA(PR Review & Impact Analysis Agent \- ADK)  
-        OA \--\>|A2A Task| DGA(Diagram Generation Agent \- ADK)  
-        OA \--\>|A2A Task| CSA(Code Suggestion Agent \- ADK)  
-        OA \--\>|A2A Task| QAA(Q\&A Agent \- ADK)
-
-        CRA \--\>|Code Path/Data via A2A| OA  
-        SA \--\>|Kết quả SAST via A2A| OA  
-        SCAA \--\>|Kết quả SCA via A2A| OA  
-        PRIA \--\>|Kết quả Phân tích PR via A2A| OA  
-        DGA \--\>|Sơ đồ via A2A| OA  
-        CSA \--\>|Gợi ý Mã via A2A| OA  
-        QAA \--\>|Câu trả lời via A2A| OA  
+        CRA -->|Code Path/Data via A2A| OA
+        SA -->|Kết quả SAST via A2A| OA
+        SCAA -->|Kết quả SCA via A2A| OA
+        PRIA -->|Kết quả Phân tích PR via A2A| OA
+        DGA -->|Sơ đồ via A2A| OA
+        CSA -->|Gợi ý Mã via A2A| OA
+        QAA -->|Câu trả lời via A2A| OA
     end
 
-    subgraph "Công cụ & Dịch vụ Bên ngoài"  
-        CRA \-.-\>|MCP Tool: Git CLI| GitRepo\[Kho Git / Filesystem\]  
-        SA \-.-\>|MCP Tool: Semgrep, PMD| Codebase1\[Codebase\]  
-        SCAA \-.-\>|MCP Tool: OWASP Dep-Check| Codebase2\[Codebase\]  
-        PRIA \-.-\>|MCP Tool: Call Graph Tools, Diff Tools| Codebase3\[Codebase\]  
-        DGA \-.-\>|MCP Tool: PlantUML, AppMap| Codebase4\[Codebase\]  
-        CSA \-.-\>|MCP Tool: LLM API| LLM\_Service1  
-        QAA \-.-\>|MCP Tool: LLM API, Vector DB (RAG)| LLM\_Service2 & KnowledgeBase  
+    subgraph "Công cụ & Dịch vụ Bên ngoài"
+        CRA -.->|MCP Tool: Git CLI| GitRepo[Kho Git / Filesystem]
+        SA -.->|MCP Tool: Semgrep, PMD| Codebase1[Codebase]
+        SCAA -.->|MCP Tool: OWASP Dep-Check| Codebase2[Codebase]
+        PRIA -.->|MCP Tool: Call Graph Tools, Diff Tools| Codebase3[Codebase]
+        DGA -.->|MCP Tool: PlantUML, AppMap| Codebase4[Codebase]
+        CSA -.->|MCP Tool: LLM API| LLM_Service1
+        QAA -.->|MCP Tool: LLM API| LLM_Service2
+        QAA -.->|MCP Tool: KnowledgeBase| KnowledgeBase
     end
 
-    OA \--\>|Phản hồi| User
+    OA -->|Phản hồi| User
 
-    style OA fill:\#f9f,stroke:\#333,stroke-width:2px  
-    style CRA fill:\#ccf,stroke:\#333,stroke-width:2px  
-    style SA fill:\#ccf,stroke:\#333,stroke-width:2px  
-    style SCAA fill:\#ccf,stroke:\#333,stroke-width:2px  
-    style PRIA fill:\#ccf,stroke:\#333,stroke-width:2px  
-    style DGA fill:\#ccf,stroke:\#333,stroke-width:2px  
-    style CSA fill:\#ccf,stroke:\#333,stroke-width:2px  
-    style QAA fill:\#ccf,stroke:\#333,stroke-width:2px
+    style OA fill:#f9f,stroke:#333,stroke-width:2px
+    style CRA fill:#ccf,stroke:#333,stroke-width:2px
+    style SA fill:#ccf,stroke:#333,stroke-width:2px
+    style SCAA fill:#ccf,stroke:#333,stroke-width:2px
+    style PRIA fill:#ccf,stroke:#333,stroke-width:2px
+    style DGA fill:#ccf,stroke:#333,stroke-width:2px
+    style CSA fill:#ccf,stroke:#333,stroke-width:2px
+    style QAA fill:#ccf,stroke:#333,stroke-width:2px
+
+```
+
+![](images/system-diagram.png)
 
 **Luồng tương tác chính:**
 
