@@ -1,0 +1,3 @@
+[submodule "mcps/sast/semgrep-rules"]
+	path = mcps/sast/semgrep-rules
+	url = https://github.com/semgrep/semgrep-rules.git

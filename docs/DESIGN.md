@@ -89,8 +89,6 @@ graph TD
 
 ```
 
-![](images/system-diagram.png)
-
 **Luồng tương tác chính:**
 
 1. **Tiếp nhận yêu cầu:** Người dùng hoặc hệ thống CI/CD gửi yêu cầu đến Orchestrator Agent (OA).  
