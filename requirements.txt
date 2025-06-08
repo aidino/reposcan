@@ -1,1 +1,3 @@
 semgrep
+google-adk
+python-dotenv
