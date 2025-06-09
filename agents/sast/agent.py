@@ -11,8 +11,8 @@ from sast.prompt import SCAN_PROMPT
 from pathlib import Path
 
 from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, StdioServerParameters
-PATH_TO_YOUR_MCP_SERVER_SCRIPT = str((Path(__file__).parent / "server.py").resolve())
 
+PATH_TO_YOUR_MCP_SERVER_SCRIPT = str((Path(__file__).parent / "server.py").resolve())
 
 import warnings
 # Ignore all warnings
@@ -33,7 +33,6 @@ root_agent = LlmAgent(
                 connection_params=StdioServerParameters(
                     command='python3', # Command to run your MCP server script
                     args=[PATH_TO_YOUR_MCP_SERVER_SCRIPT], # Argument is the path to the script
-                    timeout=60.0,  # Tăng timeout lên 60 giây
                 )
             )
         ],
