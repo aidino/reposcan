@@ -1,0 +1,3 @@
+[submodule "agents/sast/tools/semgrep-rules"]
+	path = agents/sast/tools/semgrep-rules
+	url = https://github.com/semgrep/semgrep-rules.git
