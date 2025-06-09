@@ -1,3 +1,4 @@
-semgrep
-google-adk
-python-dotenv
+google-adk==1.2.1
+litellm==1.72.2
+semgrep==1.79.0
+mcp==1.9.3
