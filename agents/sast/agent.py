@@ -2,12 +2,7 @@
 import json # Needed for pretty printing dicts
 from google.adk.agents import LlmAgent
 from google.adk.models.lite_llm import LiteLlm
-from google.adk.runners import Runner
-from google.adk.sessions import InMemorySessionService
-from google.genai import types
-from pydantic import BaseModel, Field
-from typing import List, Dict, Any
-from sast.prompt import SCAN_PROMPT
+from agents.sast.prompt import SCAN_PROMPT
 from pathlib import Path
 
 from google.adk.tools.mcp_tool.mcp_toolset import MCPToolset, StdioServerParameters

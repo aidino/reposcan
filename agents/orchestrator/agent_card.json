@@ -1,0 +1,25 @@
+{
+  "name": "OrchestratorAgent",
+  "description": "Agent điều phối trung tâm, 'bộ não' của hệ thống.",
+  "skills": [
+    {
+      "name": "orchestration.delegate_task",
+      "description": "Nhận một yêu cầu phức tạp và ủy quyền cho các Agent chuyên biệt.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "request_description": {
+            "type": "string",
+            "description": "Mô tả chi tiết về yêu cầu cần thực hiện."
+          }
+        },
+        "required": ["request_description"]
+      }
+    }
+  ],
+  "endpoint": {
+    "url": "http://localhost:8080/a2a/api",
+    "protocol": "a2a",
+    "type": "http"
+  }
+}
